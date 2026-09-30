@@ -5,4 +5,6 @@ An unofficial arctic, north-bluish clean and elegant Mozilla Firefox theme.
 
 Based on the Nord Color Palette from https://www.nordtheme.com/
 
+Compatible with the Firefox Nova interface (Firefox 157+): explicit selected-tab colors (`tab_selected` / `tab_line`), semi-transparent toolbar button states, dedicated sidebar colors, and a declared dark color scheme. Only colors from the official Nord palette are used.
+
 Please install at https://addons.mozilla.org/en-US/firefox/addon/nord-firefox/

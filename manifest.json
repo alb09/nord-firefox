@@ -1,38 +1,53 @@
 {
-  "manifest_version": 2,
-  "version": "2.42",
-  "name": "Nord Theme",
+  "manifest_version": 3,
+  "version": "3.0",
+  "name": "Nord",
+  "description": "An arctic, north-bluish clean and elegant Mozilla Firefox theme.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{f4c9e1d6-6630-4600-ad50-d223eab7f3e7}"
+    }
+  },
   "theme": {
+    "properties": {
+      "color_scheme": "dark"
+    },
     "colors": {
       "frame": "#2e3440",
+      "frame_inactive": "#3b4252",
       "toolbar": "#3b4252",
       "tab_text": "#eceff4",
-      "tab_loading": "#81a1c1",
-      "tab_line": "#81a1c1",
+      "tab_background_text": "#d8dee9",
       "tab_selected": "#434c5e",
+      "tab_line": "#81a1c1",
+      "tab_loading": "#81a1c1",
       "bookmark_text": "#d8dee9",
+      "toolbar_text": "#d8dee9",
       "icons": "#d8dee9",
       "icons_attention": "#88c0d0",
-      "tab_background_text": "#d8dee9",
+      "button_background_hover": "rgba(229, 233, 240, 0.15)",
+      "button_background_active": "rgba(229, 233, 240, 0.30)",
       "toolbar_field": "#2e3440",
       "toolbar_field_text": "#eceff4",
+      "toolbar_field_text_focus": "#eceff4",
       "toolbar_field_focus": "#434c5e",
+      "toolbar_field_border": "#4c566a",
       "toolbar_field_border_focus": "#88c0d0",
       "toolbar_field_highlight": "#5e81ac",
       "toolbar_field_highlight_text": "#eceff4",
       "toolbar_top_separator": "#3b4252",
       "toolbar_bottom_separator": "#3b4252",
+      "toolbar_vertical_separator": "#d8dee9",
       "popup": "#434c5e",
       "popup_text": "#eceff4",
       "popup_highlight": "#88c0d0",
       "popup_highlight_text": "#2e3440",
       "popup_border": "#4c566a",
       "ntp_background": "#2e3440",
-      "ntp_text": "#d8dee9",
+      "ntp_card_background": "#3b4252",
+      "ntp_text": "#e5e9f0",
       "sidebar": "#434c5e",
       "sidebar_text": "#eceff4",
-      "sidebar_highlight": "#88c0d0",
-      "sidebar_highlight_text": "#2e3440",
       "sidebar_border": "#4c566a"
     }
   }

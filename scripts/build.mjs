@@ -29,15 +29,10 @@ if (missing.length || extra.length) {
   process.exit(1);
 }
 
-// Upstream version + our light revision -> "<upstream major.minor.patch>.<lightRevision>".
-// Bump lightRevision to publish again after editing the light palette. Upstream's version is
-// normalised to three parts first so a four-part upstream release cannot push us past AMO's
-// four-part limit.
-const parts = String(up.version).split(".").map((n) => parseInt(n, 10));
-if (parts.some((n) => !Number.isInteger(n))) throw new Error(`upstream version is not numeric: ${up.version}`);
-const upstream3 = parts.slice(0, 3).concat([0, 0, 0]).slice(0, 3);
-const version = `${upstream3.join(".")}.${cfg.lightRevision}`;
-if (version.split(".").length > 4) throw new Error(`assembled version is not valid for AMO: ${version}`);
+// The version is this fork's own, not upstream's: v1 is the fork with a light palette
+// added. Bump it in config.json to publish again.
+const version = String(cfg.version);
+if (!/^\d+(\.\d+){0,3}$/.test(version)) throw new Error(`version is not valid for AMO: ${version}`);
 
 const manifest = {
   manifest_version: up.manifest_version,
@@ -58,5 +53,5 @@ writeFileSync(join(dist, "manifest.json"), JSON.stringify(manifest, null, 2) + "
 execFileSync("zip", ["-q", "-X", `nord-auto-${version}.xpi`, "manifest.json"], { cwd: dist });
 console.log(`built dist/nord-auto-${version}.xpi`);
 console.log(`  dark  manifest.json (${up.version}), ${darkKeys.length} keys`);
-console.log(`  light src/light.json revision ${cfg.lightRevision}, ${Object.keys(light.colors).length} keys`);
+console.log(`  light src/light.json, ${Object.keys(light.colors).length} keys`);
 console.log("  toggle: theme = light scheme, dark_theme = dark scheme, Light/Dark/System follows the system");

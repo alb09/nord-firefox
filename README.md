@@ -20,11 +20,16 @@ active variant instead of staying dark. There is no code in the add-on — it is
 | `src/light.json` | our light palette, one value per dark-palette key |
 | `config.json` | add-on id, name, version inputs, update URL |
 | `scripts/build.mjs` | generates `dist/manifest.json` + `.xpi` from the two palettes. No network. |
-| `scripts/release.mjs` | build → sign unlisted at AMO → append to `updates.json` |
-| `updates.json` | update manifest Firefox polls |
-| `releases/` | signed xpis the feed points at |
+| `scripts/release.mjs` | build → sign unlisted at AMO → append to `docs/updates.json` |
+| `docs/updates.json` | update manifest Firefox polls |
+| `docs/releases/` | signed xpis the feed points at |
 
 `dist/`, `signed/`, and `web-ext-artifacts/` are build output and not tracked.
+
+Pages publishes `docs/`, not the repo root. That keeps upstream's `manifest.json` at the root
+where merges can find it, and stops GitHub serving a dark-only manifest carrying upstream's
+add-on id. Nothing in the add-on references this layout — Firefox only ever fetches
+`docs/updates.json`.
 
 ## Building
 
@@ -33,10 +38,9 @@ node scripts/build.mjs            # unsigned dist/nord-auto-<version>.xpi
 node scripts/release.mjs          # sign at AMO and update the feed, then commit + push
 ```
 
-The version is always `<upstream major.minor.patch>.<lightRevision>` (currently `3.0.0.1`):
-upstream's version is normalised to three parts first, so a four-part upstream release cannot
-push the add-on past AMO's four-part limit. Bump `lightRevision` in `config.json` to publish
-again after editing the light palette.
+The version is the fork's own, set as `version` in `config.json` (currently `1`); it does not
+track upstream's, since this fork has its own identity and its own release history. Bump it to
+publish again.
 
 The build refuses to run if the two palettes cover different keys, naming the keys that
 differ — one palette missing a key means Firefox silently falls back to a default colour.

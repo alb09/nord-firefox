@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Build -> sign (AMO unlisted) -> copy into releases/ -> update updates.json.
+// Build -> sign (AMO unlisted) -> copy into docs/releases/ -> update docs/updates.json.
 // Exits early if that version is already in the feed. Commit + push to publish.
 // Needs WEB_EXT_API_KEY / WEB_EXT_API_SECRET in the environment (never commit them).
 import { readFileSync, writeFileSync, existsSync, readdirSync, copyFileSync, mkdirSync, rmSync } from "node:fs";
@@ -14,7 +14,12 @@ const run = (cmd, args, opts = {}) => execFileSync(cmd, args, { stdio: "inherit"
 run("node", ["scripts/build.mjs"]);
 const { version } = JSON.parse(readFileSync(join(root, "dist/manifest.json"), "utf8"));
 
-const feedPath = join(root, "updates.json");
+// Everything Pages serves lives in docs/, which is the only publish root GitHub offers besides
+// /. Keeping it separate lets the repo root hold upstream's manifest.json unmodified for clean
+// merges — otherwise Pages would serve a dark-only manifest carrying upstream's add-on id.
+// Firefox only ever fetches docs/updates.json, so its location is invisible to the add-on.
+const docs = join(root, "docs");
+const feedPath = join(docs, "updates.json");
 const feed = existsSync(feedPath) ? JSON.parse(readFileSync(feedPath, "utf8")) : {};
 feed.addons ??= {};
 feed.addons[cfg.id] ??= { updates: [] };
@@ -62,10 +67,10 @@ if (!inside.theme?.colors || !inside.dark_theme?.colors) {
   throw new Error(`${signed} has no theme/dark_theme pair`);
 }
 
-mkdirSync(join(root, "releases"), { recursive: true });
+mkdirSync(join(docs, "releases"), { recursive: true });
 const name = `nord-auto-${version}.xpi`;
-copyFileSync(signed, join(root, "releases", name));
+copyFileSync(signed, join(docs, "releases", name));
 
 updates.push({ version, update_link: `${cfg.updateBaseUrl}/releases/${name}` });
 writeFileSync(feedPath, JSON.stringify(feed, null, 2) + "\n");
-console.log(`released ${name}; commit updates.json + releases/ and publish`);
+console.log(`released ${name}; commit docs/ and push to publish`);

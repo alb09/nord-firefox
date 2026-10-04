@@ -9,6 +9,7 @@ dist/
 signed/
 web-ext-artifacts/
 
-# ...but releases/ is published by the update feed, so its signed xpi is tracked
-!releases/
-!releases/*.xpi
+# ...but docs/releases/ is published by the update feed, so its signed xpi is tracked
+!docs/
+!docs/releases/
+!docs/releases/*.xpi

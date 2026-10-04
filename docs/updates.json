@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "nord-auto@alb09.github.io": {
+      "updates": [
+        {
+          "version": "1",
+          "update_link": "https://alb09.github.io/nord-firefox/releases/nord-auto-1.xpi"
+        }
+      ]
+    }
+  }
+}

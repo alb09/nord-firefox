@@ -1,0 +1,8 @@
+{
+  "upstream": "dragonejt/nord-firefox",
+  "id": "nord-auto@alb09.github.io",
+  "name": "Nord Auto",
+  "description": "Nord theme that follows the system light/dark setting. Dark palette tracks upstream dragonejt/nord-firefox.",
+  "lightRevision": 1,
+  "updateBaseUrl": "https://alb09.github.io/nord-firefox"
+}

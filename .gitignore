@@ -3,3 +3,12 @@
 
 #Firefox Extension Binaries
 *.xpi
+
+# build output and signing scratch
+dist/
+signed/
+web-ext-artifacts/
+
+# ...but releases/ is published by the update feed, so its signed xpi is tracked
+!releases/
+!releases/*.xpi

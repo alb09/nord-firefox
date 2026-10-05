@@ -5,21 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nord Auto</title>
 <style>
-  :root { color-scheme: light dark; }
+  /* Every text and background pairing below is verified against WCAG AA (4.5:1 for normal
+     text, 3:1 for the focus ring and swatch outlines). Do not "simplify" these back to
+     opacity or to Nord Frost, both of which fail in one scheme or the other. */
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #2e3440;
+    --muted: #4c566a;
+    --link: #35618f;
+    --focus: #35618f;
+    --code-bg: #ececec;
+    --hairline: #d8dee9;
+    --swatch-edge: #8c8c8c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1b22;
+      --fg: #d8dee9;
+      --muted: #b0b8c4;
+      --link: #88c0d0;
+      --focus: #88c0d0;
+      --code-bg: #32323a;
+      --hairline: #434c5e;
+      --swatch-edge: #7b7d86;
+    }
+  }
   body {
     font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
     max-width: 42rem; margin: 0 auto; padding: 3rem 1.5rem;
+    background: var(--bg); color: var(--fg);
   }
   h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-  p.tagline { margin: 0 0 2rem; opacity: .75; }
-  h2 { font-size: 1rem; margin: 2.5rem 0 .75rem; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+  p.tagline { margin: 0 0 2rem; color: var(--muted); }
+  h2 { font-size: 1rem; margin: 2.5rem 0 .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
   ul { padding-left: 1.2rem; }
   li { margin: .4rem 0; }
-  a { color: #5e81ac; }
-  code { font-size: .9em; background: rgba(127,127,127,.15); padding: .1em .35em; border-radius: 3px; }
+  a { color: var(--link); }
+  a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+  code { font-size: .9em; background: var(--code-bg); padding: .1em .35em; border-radius: 3px; }
   .swatch { display: inline-block; width: 1rem; height: 1rem; border-radius: 3px; vertical-align: -2px;
-            border: 1px solid rgba(127,127,127,.4); margin-right: .3rem; }
-  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(127,127,127,.25); font-size: .9rem; }
+            border: 1px solid var(--swatch-edge); margin-right: .3rem; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--hairline); font-size: .9rem; }
   footer a { margin-right: 1rem; }
 </style>
 </head>
@@ -38,7 +65,7 @@
   appear in Firefox's add-on search. Install it once from the signed file:
 </p>
 <ul>
-  <li><a href="releases/nord-auto-1.xpi">Download nord-auto-1.xpi</a> — signed by AMO, 8105 bytes</li>
+  <li><a href="releases/nord-auto-1.xpi">Download nord-auto-1.xpi</a>, signed by AMO, 8105 bytes</li>
   <li>Open <code>about:addons</code>, then the gear menu &rarr; <em>Install Add-on From File</em></li>
 </ul>
 <p>
@@ -53,13 +80,13 @@
   <code>color_scheme</code>, so menus and built-in pages follow the active variant.
 </p>
 <ul>
-  <li><span class="swatch" style="background:#d8dee9"></span>Light — Snow Storm <code>#d8dee9</code>, Frost <code>#eceff4</code></li>
-  <li><span class="swatch" style="background:#2e3440"></span>Dark — Polar Night <code>#2e3440</code>, base</li>
+  <li><span class="swatch" style="background:#d8dee9"></span>Light, Snow Storm: <code>#d8dee9</code>, Frost <code>#eceff4</code></li>
+  <li><span class="swatch" style="background:#2e3440"></span>Dark, Polar Night: <code>#2e3440</code>, the base</li>
 </ul>
 
 <h2>For the updater</h2>
 <ul>
-  <li><a href="updates.json">updates.json</a> — the update manifest Firefox polls</li>
+  <li><a href="updates.json">updates.json</a>, the update manifest Firefox polls</li>
   <li><a href="https://github.com/alb09/nord-firefox/releases/tag/v1">GitHub Release v1</a></li>
 </ul>
 

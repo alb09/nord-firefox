@@ -10,7 +10,7 @@ appearance setting.
 Firefox's appearance setting (Light / Dark / System) chooses between the two palettes a theme
 ships: `theme` is used for the light scheme, `dark_theme` for the dark one, and **System**
 follows the OS. Both declare `properties.color_scheme`, so menus and built-in pages follow the
-active variant instead of staying dark. There is no code in the add-on — it is a static manifest.
+active variant instead of staying dark. There is no code in the add-on: it is a static manifest.
 
 ## Layout
 
@@ -28,7 +28,7 @@ active variant instead of staying dark. There is no code in the add-on — it is
 
 Pages publishes `docs/`, not the repo root. That keeps upstream's `manifest.json` at the root
 where merges can find it, and stops GitHub serving a dark-only manifest carrying upstream's
-add-on id. Nothing in the add-on references this layout — Firefox only ever fetches
+add-on id. Nothing in the add-on references this layout; Firefox only ever fetches
 `docs/updates.json`.
 
 ## Building
@@ -43,7 +43,7 @@ track upstream's, since this fork has its own identity and its own release histo
 publish again.
 
 The build refuses to run if the two palettes cover different keys, naming the keys that
-differ — one palette missing a key means Firefox silently falls back to a default colour.
+differ, because one palette missing a key means Firefox silently falls back to a default colour.
 
 `release.mjs` pins `web-ext` to an exact version (the `WEB_EXT_VERSION` constant). Leave it
 pinned: the AMO credentials are in the environment during that call, so whatever version runs

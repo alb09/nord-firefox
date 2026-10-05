@@ -11,6 +11,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const cfg = JSON.parse(readFileSync(join(root, "config.json"), "utf8"));
 const run = (cmd, args, opts = {}) => execFileSync(cmd, args, { stdio: "inherit", cwd: root, ...opts });
 
+// The web-ext release that signed v1. Bump deliberately, after reading its changelog.
+const WEB_EXT_VERSION = "10.7.0";
+
 run("node", ["scripts/build.mjs"]);
 const { version } = JSON.parse(readFileSync(join(root, "dist/manifest.json"), "utf8"));
 
@@ -49,8 +52,13 @@ if (adopt !== -1) {
   for (const f of readdirSync(join(root, "dist")).filter((f) => f.endsWith(".xpi"))) {
     rmSync(join(root, "dist", f));
   }
-  run("npx", ["--yes", "web-ext", "sign", "--channel=unlisted", "--source-dir=dist",
-    "--artifacts-dir=signed", "--approval-timeout=30"]);
+  // web-ext is pinned exactly. Unpinned, this resolves whatever is newest on npm while the
+  // AMO API credentials sit in the environment: whoever controls that package could sign a
+  // theme under our add-on id, and a Mozilla-signed theme passes Firefox's update check and
+  // reaches everyone who has it installed. Pinning does not defend against a compromise of
+  // the registry account or this exact version's tarball; it removes the moving target.
+  run("npx", ["--yes", `web-ext@${WEB_EXT_VERSION}`, "sign", "--channel=unlisted",
+    "--source-dir=dist", "--artifacts-dir=signed", "--approval-timeout=30"]);
   const fresh = readdirSync(signedDir).filter((f) => f.endsWith(".xpi") && !before.has(f));
   if (fresh.length !== 1) {
     throw new Error(`expected exactly one newly signed xpi in signed/, found ${fresh.length}`);

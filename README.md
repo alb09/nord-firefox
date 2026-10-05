@@ -45,6 +45,26 @@ publish again.
 The build refuses to run if the two palettes cover different keys, naming the keys that
 differ — one palette missing a key means Firefox silently falls back to a default colour.
 
+`release.mjs` pins `web-ext` to an exact version (the `WEB_EXT_VERSION` constant). Leave it
+pinned: the AMO credentials are in the environment during that call, so whatever version runs
+can sign a theme under this add-on's id, and a Mozilla-signed theme passes Firefox's update
+check and reaches everyone who has the add-on installed. Bump it deliberately, after reading
+the changelog.
+
+### After pushing
+
+Check that the commit you pushed is the one Pages actually deployed:
+
+```sh
+gh api repos/alb09/nord-firefox/pages/builds/latest --jq '.commit, .status'
+gh api repos/alb09/nord-firefox/deployments --jq '.[0].sha'
+```
+
+A successful build is not a successful deployment. GitHub sometimes reports `built` while the
+site still serves an older commit, most visibly after changing the Pages source path, which
+does not by itself trigger a rebuild. If the two SHAs disagree with your `HEAD`, push an empty
+commit (`git commit --allow-empty`) to force the redeploy, then check again.
+
 ## Staying current with upstream
 
 `git fetch upstream && git merge upstream/master` is all it takes. Upstream's `manifest.json`

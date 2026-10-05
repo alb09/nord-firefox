@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nord Auto</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    max-width: 42rem; margin: 0 auto; padding: 3rem 1.5rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  p.tagline { margin: 0 0 2rem; opacity: .75; }
+  h2 { font-size: 1rem; margin: 2.5rem 0 .75rem; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+  ul { padding-left: 1.2rem; }
+  li { margin: .4rem 0; }
+  a { color: #5e81ac; }
+  code { font-size: .9em; background: rgba(127,127,127,.15); padding: .1em .35em; border-radius: 3px; }
+  .swatch { display: inline-block; width: 1rem; height: 1rem; border-radius: 3px; vertical-align: -2px;
+            border: 1px solid rgba(127,127,127,.4); margin-right: .3rem; }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(127,127,127,.25); font-size: .9rem; }
+  footer a { margin-right: 1rem; }
+</style>
+</head>
+<body>
+<h1>Nord Auto</h1>
+<p class="tagline">The Nord palette, both halves. Follows Firefox's Light / Dark / System setting.</p>
+
+<p>
+  A fork of <a href="https://addons.mozilla.org/firefox/addon/nord-firefox/">dragonejt's Nord theme</a>,
+  which ships dark only. The dark palette is upstream's, untouched; this adds the light one.
+</p>
+
+<h2>Install</h2>
+<p>
+  This add-on is signed but <strong>unlisted</strong> on addons.mozilla.org, so it will not
+  appear in Firefox's add-on search. Install it once from the signed file:
+</p>
+<ul>
+  <li><a href="releases/nord-auto-1.xpi">Download nord-auto-1.xpi</a> — signed by AMO, 8105 bytes</li>
+  <li>Open <code>about:addons</code>, then the gear menu &rarr; <em>Install Add-on From File</em></li>
+</ul>
+<p>
+  That is a one-time step. Firefox then polls the update manifest below on its own schedule and
+  applies new versions without you doing anything.
+</p>
+
+<h2>Palette</h2>
+<p>
+  Thirty-six colour keys per palette, all from the official
+  <a href="https://www.nordtheme.com/">Nord</a> palette. Each side declares its own
+  <code>color_scheme</code>, so menus and built-in pages follow the active variant.
+</p>
+<ul>
+  <li><span class="swatch" style="background:#d8dee9"></span>Light — Snow Storm <code>#d8dee9</code>, Frost <code>#eceff4</code></li>
+  <li><span class="swatch" style="background:#2e3440"></span>Dark — Polar Night <code>#2e3440</code>, base</li>
+</ul>
+
+<h2>For the updater</h2>
+<ul>
+  <li><a href="updates.json">updates.json</a> — the update manifest Firefox polls</li>
+  <li><a href="https://github.com/alb09/nord-firefox/releases/tag/v1">GitHub Release v1</a></li>
+</ul>
+
+<footer>
+  <a href="https://github.com/alb09/nord-firefox">Source</a>
+  <a href="https://github.com/dragonejt/nord-firefox">Upstream</a>
+  <span>Add-on id <code>nord-auto@alb09.github.io</code></span>
+</footer>
+</body>
+</html>
